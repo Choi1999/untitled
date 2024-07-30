@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        double[] results = new double[10]; // 연산 결과를 저장할 배열
+        int count = 0; // 저장된 결과의 개수를 세기 위한 변수
         boolean continueCalculating = true; // 계산을 계속할지 여부를 체크하는 변수
 
         while (continueCalculating) {
@@ -34,7 +36,7 @@ public class App {
                 result = firstNumber * secondNumber;
             } else if (operator == '/') {
                 if (secondNumber == 0) {
-                    System.out.println("나눗셈 연산에서 분모(두 번째 정수)에 0이 입력될 수 없습니다.");
+                    System.out.println("나눗셈 연산에서 분모(두 번째 수)에 0이 입력될 수 없습니다.");//정수 부분 수정
                     validOperation = false; // 연산이 유효하지 않음을 표시
                 } else {
                     result = firstNumber / secondNumber; // double로 나누기
@@ -46,8 +48,11 @@ public class App {
 
             //결과출력
             if (validOperation) {
+                results[count] = result; // 결과 저장
+                count++; // 저장된 결과 개수 증가
                 System.out.println("결과: " + result);
             }
+            //배열이 다 차있는 경우 오류가 발생할것
 
             //진행 여부 확인
             char continueInput;
@@ -61,6 +66,10 @@ public class App {
                 }
             } while (continueInput != 'Y' && continueInput != 'y' && continueInput != 'N' && continueInput != 'n');
 
+        }
+        System.out.println("저장된 결과: ");
+        for (int i = 0; i < count; i++) {
+            System.out.println("결과 " + (i + 1) + ". " + results[i]);
         }
         sc.close();
         System.out.println("계산 종료.");
