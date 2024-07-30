@@ -1,11 +1,13 @@
 package calculator;
 
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        double[] results = new double[10]; // 연산 결과를 저장할 배열
+        List<Double> results = new ArrayList<>(); // 결과를 저장할 ArrayList
         int count = 0; // 저장된 결과의 개수를 세기 위한 변수
         boolean continueCalculating = true; // 계산을 계속할지 여부를 체크하는 변수
 
@@ -48,18 +50,20 @@ public class App {
 
             //결과출력
             if (validOperation) {
-                if (count < 10) { // 배열이 가득 차지 않은 경우에만 저장
-                    results[count] = result; // 결과 저장
-                    count++; // 저장된 결과 개수 증가
-                } else {
-                    // 배열이 가득 찼을 경우 가장 오래된 결과 삭제 및 앞으로 이동
-                    System.out.println("저장된 결과가 가득 찼습니다. 가장 오래된 결과가 삭제되었습니다.");
-                    for (int i = 0; i < 9; i++) {
-                        results[i] = results[i + 1]; // 한 칸씩 앞으로 이동
-                    }
-                    results[9] = result; // 새로운 결과를 마지막 인덱스에 저장
-                }
+                results.add(result); // 결과를 ArrayList에 추가
                 System.out.println("결과: " + result);
+
+                // 삭제 여부 확인
+                System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+                String input = sc.next();
+                if (input.equals("remove")) {
+                    if (!results.isEmpty()) {
+                        results.remove(0); // 가장 먼저 저장된 결과 삭제
+                        System.out.println("가장 먼저 저장된 결과가 삭제되었습니다.");
+                    } else {
+                        System.out.println("저장된 결과가 없습니다.");
+                    }
+                }
             }
             //진행 여부 확인
             char continueInput;
@@ -75,8 +79,8 @@ public class App {
 
         }
         System.out.println("저장된 결과: ");
-        for (int i = 0; i < count; i++) {
-            System.out.println("결과 " + (i + 1) + ". " + results[i]);
+        for (int i = 0; i < results.size(); i++) {
+            System.out.println("결과 " + (i + 1) + ". " + results.get(i));
         }
         sc.close();
         System.out.println("계산 종료.");
