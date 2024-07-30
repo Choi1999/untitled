@@ -53,13 +53,13 @@ public class App {
                     count++; // 저장된 결과 개수 증가
                 } else {
                     // 배열이 가득 찼을 경우 가장 오래된 결과 삭제 및 앞으로 이동
+                    System.out.println("저장된 결과가 가득 찼습니다. 가장 오래된 결과가 삭제되었습니다.");
                     for (int i = 0; i < 9; i++) {
                         results[i] = results[i + 1]; // 한 칸씩 앞으로 이동
                     }
                     results[9] = result; // 새로운 결과를 마지막 인덱스에 저장
                 }
                 System.out.println("결과: " + result);
-                //배열이 다 차있는 경우 오류가 발생할것
             }
             //진행 여부 확인
             char continueInput;
