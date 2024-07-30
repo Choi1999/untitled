@@ -11,10 +11,10 @@ public class App {
 
         while (continueCalculating) {
             System.out.print("첫 번째 숫자를 입력하세요: ");
-            double firstNumber = sc.nextInt(); //확장을 위해서 자료형 변경
+            double firstNumber = sc.nextDouble(); //확장을 위해서 자료형 변경
             // Scanner를 사용하여 양의 정수를 입력받고 적합한 타입의 변수에 저장합니다.
             System.out.print("두 번째 숫자를 입력하세요: ");
-            double secondNumber = sc.nextInt();
+            double secondNumber = sc.nextDouble();
             // Scanner를 사용하여 양의 정수를 입력받고 적합한 타입의 변수에 저장합니다.
             System.out.print("사칙연산 기호를 입력하세요: ");
             char operator = sc.next().charAt(0);
@@ -48,12 +48,19 @@ public class App {
 
             //결과출력
             if (validOperation) {
-                results[count] = result; // 결과 저장
-                count++; // 저장된 결과 개수 증가
+                if (count < 10) { // 배열이 가득 차지 않은 경우에만 저장
+                    results[count] = result; // 결과 저장
+                    count++; // 저장된 결과 개수 증가
+                } else {
+                    // 배열이 가득 찼을 경우 가장 오래된 결과 삭제 및 앞으로 이동
+                    for (int i = 0; i < 9; i++) {
+                        results[i] = results[i + 1]; // 한 칸씩 앞으로 이동
+                    }
+                    results[9] = result; // 새로운 결과를 마지막 인덱스에 저장
+                }
                 System.out.println("결과: " + result);
+                //배열이 다 차있는 경우 오류가 발생할것
             }
-            //배열이 다 차있는 경우 오류가 발생할것
-
             //진행 여부 확인
             char continueInput;
             do {
