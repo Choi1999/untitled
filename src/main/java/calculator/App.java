@@ -64,6 +64,17 @@ public class App {
                         System.out.println("저장된 결과가 없습니다.");
                     }
                 }
+
+                // 저장된 결과 조회
+                System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+                String inquiryInput = sc.next();
+                if (inquiryInput.equals("inquiry")) {
+                    System.out.println("저장된 연산 결과:");
+                    for (double res : results) {
+                        System.out.println(res);
+                    }
+                }
+
             }
             //진행 여부 확인
             char continueInput;
